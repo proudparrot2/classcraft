@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>classcraft</title>
+  <link rel="icon" type="image/png" href="computer-1.png" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="text/javascript" src="classes.js"></script>
+<script type="text/javascript" src="eagswebrtc.js"></script>
+<script type="text/javascript">
+if(document.location.href.startsWith("file:")) {
+alert("You cannot 'open' this file in your browser, the code doesn't work. Upload this folder to your HTTP(s) server and access it via the internet to launch the stable-download game. This is not a bug, please read the documentation");
+}else {
+window.addEventListener("load", function(){
+const relayId = Math.floor(Math.random() * 3);
+window.eaglercraftOpts = {
+container: "game_frame", assetsURI: "assets.epk", serverWorkerURI: "worker_bootstrap.js", worldsFolder: "MAIN",
+relays: [
+	{ addr: "wss://relay.deev.is/", name: "lax1dude relay #1", primary: relayId == 0 },
+	{ addr: "wss://relay.lax1dude.net/", name: "lax1dude relay #2", primary: relayId == 1 },
+	{ addr: "wss://relay.shhnowisnottheti.me/", name: "ayunami relay #1", primary: relayId == 2 }
+]};
+(function(){
+var q = window.location.search;
+if(typeof q === 'string' && q.startsWith("?")) {
+	q = new URLSearchParams(q);
+	var s = q.get("server");
+	if(s) window.minecraftOpts.push(s);
+}
+})();
+main();
+});}
+</script>
+</head>
+<body style="margin:0px;width:100vw;height:100vh;" id="game_frame">
+</body>
+</html>
