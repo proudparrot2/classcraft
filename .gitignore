@@ -3,4 +3,4 @@ otherfiles/
 .config/
 
 .replit
-replix.nix
+replit.nix
